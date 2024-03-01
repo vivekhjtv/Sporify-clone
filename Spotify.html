@@ -1,0 +1,287 @@
+<!-- *********************************************************************************
+* ITC5202 – Project
+* I declare that this assignment is my own work in accordance with Humber Academic Policy.
+* No part of this assignment has been copied manually or electronically from any other source
+* (including web sites) or distributed to other students.
+*
+* Date: 17th August 2023 
+*
+*
+******************************************************************************** -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="spotify.css">
+    
+</head>
+<body>
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div  class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div style="border: solid green 5px; border-radius: 20px;" class="modal-dialog modal-lg" role="document">
+    <div style="background-color: black;color: whitesmoke; border-radius: 20px;" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button style="color: whitesmoke;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span style="color: whitesmoke;" aria-hidden="true" class="fa fa-times"></span>
+        </button>
+      </div>
+     
+        <div id="AlbumSongs" class="modal-body">
+        
+        </div>
+     
+      
+    </div>
+  </div>
+</div>
+
+<div  class="modal fade" id="ArtistCoverModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div style="border: solid green 5px; border-radius: 20px;" class="modal-dialog" role="document">
+    <div style="background-color: black;color: whitesmoke; border-radius: 20px;" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button style="color: whitesmoke;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span style="color: whitesmoke;" aria-hidden="true" class="fa fa-times"></span>
+        </button>
+      </div>
+     
+        <div id="ArtistCover" class="modal-body">
+        
+        </div>
+     
+      
+    </div>
+  </div>
+</div>
+
+<div  class="modal fade" id="SearchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div style="border: solid green 5px; border-radius: 20px;" class="modal-dialog" role="document">
+    <div style="background-color: black;color: whitesmoke; border-radius: 20px;" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="SearchModalLabel">Search</h5>
+        <button style="color: whitesmoke;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span style="color: whitesmoke;" aria-hidden="true" class="fa fa-times"></span>
+        </button>
+      </div>
+      
+      <div id="Search" class="modal-body spotify-playlists">
+        <div class="row">
+          <div class="col-10">
+            <input type="text" class="form-control" name="search" id="searchbox">
+          </div>
+          <div class="col-2"> 
+            <button onclick="getSearches()" class="btn" style="background-color: lightgreen; color: black; float: right;">
+              <i class="fa-fa-search" aria-hidden="true">Search</i></button>
+
+          </div>
+        </div>
+       
+       
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- <button type="button" onclick="GetToken()">Get token and Categories</button>
+  <button type="button" onclick="GetSongs()">Get Song </button>
+  <button type="button" onclick="GetArtists()">Get Artist</button>
+  <button type="button" onclick="GetAlbums()">Get Album</button>
+  <button type="button" onclick="GetGenres()">Get Genres</button>
+  <button type="button" onclick="GetPlayLists()">Get PlayList</button>
+  <button type="button" onclick="GetMarkets()">Get Markets</button>
+  <button type="button" onclick="GetNewReleasess()">Get New Releases</button>
+  <button type="button" onclick="GetAudioBooks()">Get AudioBooks</button> 
+  <button type="button" onclick="getSearches()">Get Search</button>  -->
+  <button style="visibility: hidden;" id="mybutton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+  </button>
+    <div class="sidebar">
+      <div class="logo">
+        <a onclick="pageReload()" href="#">
+          <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Green.png" alt="Logo" />
+        </a>
+      </div>
+
+      <div class="navigation">
+        <ul>
+          <li>
+            <a onclick="pageReload()" href="#">
+              <span class="fa fa-home"></span>
+              <span>Home</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              <span class="fa fa-search"></span>
+              <span id="mybutton" type="button" data-toggle="modal" data-target="#SearchModal">Search</span>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="navigation">
+        <ul>
+          <!-- <li>
+            <a href="#">
+              <span class="fa fas fa-plus-square"></span>
+              <span>Create Playlist</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              <span class="fa fas fa-heart"></span>
+              <span>Liked Songs</span>
+            </a>
+          </li> -->
+        </ul>
+      </div>
+
+      <div class="policies">
+        <ul>
+          <li>
+            <a href="#">Website By</a>
+          </li>
+          <li>
+            <a href="#">Gaurav Hariyani</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="main-container">
+      <div class="topbar">
+        <div class="prev-next-buttons">
+         <h2 style="color: lightgreen;">Popular Genres</h2>
+        </div>
+
+        <div class="navbar">
+          <ul id="genres">
+          </ul>
+        </div>
+      </div>
+
+      <div id="searchresults" class="spotify-playlists">
+
+      </div>
+
+      <div class="spotify-playlists">
+        <h2>Spotify Playlists</h2>
+        
+        <div id="playlists"  class="list row">
+        </div>
+        <h6 id="tracksfp" style="color: whitesmoke; visibility: hidden;">Tracks from Playlists</h6>
+        <div id="playlist"  class="list">
+        </div>
+      </div>
+
+      <div class="spotify-playlists">
+        <h2>New Releases</h2>
+        <div id="newreleases" class="list row">
+        </div>
+      </div>
+
+      <!-- <div class="spotify-playlists">
+        <h2>Mood</h2>
+        <div class="list">
+          <div class="item">
+            <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Mood Booster</h4>
+            <p>Get happy with today's dose of feel-good...</p>
+          </div>
+
+          <div class="item">
+            <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Feelin' Good</h4>
+            <p>Feel good with this positively timeless...</p>
+          </div>
+
+          <div class="item">
+            <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Dark & Stormy</h4>
+            <p>Beautifully dark, dramatic tracks.</p>
+          </div>
+
+          <div class="item">
+            <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Feel Good Piano</h4>
+            <p>Happy vibes for an upbeat morning.</p>
+          </div>
+
+          <div class="item">
+            <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Feelin' Myself</h4>
+            <p>The hip-hop playlist that's a whole mood...</p>
+          </div>
+
+          <div class="item">
+            <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Chill Tracks</h4>
+            <p>Softer kinda dance</p>
+          </div>
+
+          <div class="item">
+            <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Feel-Good Indie Rock</h4>
+            <p>The best indie rock vibes - classic and...</p>
+          </div>
+
+          <div class="item">
+            <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>idk.</h4>
+            <p>idk.</p>
+          </div>
+        </div>
+
+        <hr>
+      </div> -->
+
+      <div id="player" class="preview" style="position: fixed;">
+      </div>
+    </div>
+    <script
+      src="https://kit.fontawesome.com/23cecef777.js"
+      crossorigin="anonymous"
+    ></script>
+ 
+    <script src="spotify.js"></script>
+  
+</body>
+</html>
